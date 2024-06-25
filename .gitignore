@@ -1,0 +1,5 @@
+.ipynb_checkpoints
+__pycache__
+binarized_mnist.npz
+.data/**
+.DS_Store
