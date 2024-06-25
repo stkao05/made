@@ -64,7 +64,7 @@ class MADE(nn.Module):
     self.layers = nn.Sequential(*layers)
 
     mask_r = init_mask(mk[0], mk[-1], eq=False)
-    self.residual = MaskedLinear(input_size, output_size, mask_r, bias=False) # unsure if residual weight should be shared
+    self.residual = MaskedLinear(input_size, output_size, mask_r, bias=False)
 
 
   """
