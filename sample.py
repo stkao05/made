@@ -31,8 +31,8 @@ def parse_int_list(s):
 
 def main():
   parser = argparse.ArgumentParser()
-  parser.add_argument('-s', type=parse_int_list, help='hidden size, common separated', default=[500])
-  parser.add_argument('-f', help='path of the saved model weight', default=[500])
+  parser.add_argument('-s', type=parse_int_list, help='hidden size, common separated')
+  parser.add_argument('-f', help='path of the saved model weight')
   args = parser.parse_args()
   hidden_sizes = args.s
   weight_path = args.f

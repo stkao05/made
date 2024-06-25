@@ -78,7 +78,7 @@ def parse_int_list(s):
 
 def main():
   parser = argparse.ArgumentParser()
-  parser.add_argument('-s', type=parse_int_list, help='hidden size, common separated', default=[500])
+  parser.add_argument('-s', type=parse_int_list, help='hidden size, common separated')
   parser.add_argument('-e', type=int, help='epoch', default=5)
   parser.add_argument('-f', help='output path of the model weight', default=".data/mnist_made.py")
 
