@@ -4,20 +4,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class MaskedLinear(nn.Linear):
-  def __init__(self, in_features, out_features, mask, bias=True):
-    super().__init__(in_features, out_features, bias)
-    self.register_buffer("mask", mask)
-
-  """
-  x: (batch_size, in_features)
-  """
-  def forward(self, x):
-    return F.linear(x, self.weight * self.mask.T, self.bias)
-
-
 """
-return mask of size (d_in, d_out), where d_in, d_out = len(mk_in), len(mk_in)
+return mask of size (d_in, d_out), where d_in, d_out = len(mk_in), len(mk_out)
 """
 def init_mask(mk_in, mk_out, eq=True):
     mk_out = torch.tensor(mk_out).view(-1, 1)  # reshape for broadcasting
@@ -29,6 +17,18 @@ def init_mask(mk_in, mk_out, eq=True):
         mask = mk_out > mk_in
 
     return mask.float().T
+
+
+class MaskedLinear(nn.Linear):
+  def __init__(self, in_features, out_features, mask, bias=True):
+    super().__init__(in_features, out_features, bias)
+    self.register_buffer("mask", mask)
+
+  """
+  x: (batch_size, in_features)
+  """
+  def forward(self, x):
+    return F.linear(x, self.weight * self.mask.T, self.bias)
 
 
 class MADE(nn.Module):
