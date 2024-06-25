@@ -72,8 +72,7 @@ class MADE(nn.Module):
   return logit in shape of (batch_size, output_size)
   """
   def forward(self, x):
-    r = self.residual(x)
-    return self.layers(x) + r
+    return self.layers(x) + self.residual(x)
 
 
 if __name__ == '__main__':
